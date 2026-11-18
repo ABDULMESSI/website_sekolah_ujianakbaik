@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA Negeri Nusantara - Portal Resmi</title>
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #159895;
+            --accent-color: #ff6f3c;
+            --light-bg: #f8f9fa;
+            --dark-text: #333333;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            width: 80px;
+            height: 100px;
+            
+        }
+
+        .logo-area span {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-login {
+            background-color: var(--accent-color) !important;
+            color: white !important;
+        }
+
+        /* Konten Halaman (Single Page Application Simulation) */
+        .page-section {
+            display: none;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        /* Banner Utama / Slider dengan Foto */
+        .hero-banner {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            height: 400px;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-caption {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            color: white;
+            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .hero-caption h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        /* Grid Layout Halaman Utama */
+        .home-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .home-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .card-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 8px;
+        }
+
+        /* Sambutan Kepala Sekolah */
+        .sambutan-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .sambutan-content img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        /* Berita Grid */
+        .berita-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .berita-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .berita-item {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .berita-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+        }
+
+        .berita-item-text {
+            padding: 10px;
+        }
+
+        .berita-item-text h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .berita-item-text p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Styling Halaman Profil, Akademik, Kesiswaan, PPDB */
+        .sub-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .guru-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .guru-card {
+            text-align: center;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .guru-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigasi Interaktif -->
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <img src="uji.png" alt="Logo Sekolah" width="200" height="200">
+                <span>SMA NEGERI NUSANTARA</span>
+            </div>
+            <nav>
+                <a onclick="switchPage('beranda')" id="nav-beranda" class="active">Beranda</a>
+                <a onclick="switchPage('profil')" id="nav-profil">Profil</a>
+                <a onclick="switchPage('akademik')" id="nav-akademik">Akademik</a>
+                <a onclick="switchPage('kesiswaan')" id="nav-kesiswaan">Kesiswaan</a>
+                <a onclick="switchPage('ppdb')" id="nav-ppdb">PPDB</a>
+                <a onclick="switchPage('beranda')" id="nav-kontak">Kontak</a>
+                <a onclick="switchPage('portal')" id="nav-portal" class="btn-login">Login Portal</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= 1. HALAMAN BERANDA ================= -->
+    <div id="beranda" class="page-section active-page">
+        <!-- Banner Utama dengan Foto -->
+        <div class="hero-banner">
+            <img src="hafizh.jpeg" alt="Berita 1">
+            <div class="hero-caption">
+                <h2>Selamat Datang di Website Resmi SMA Negeri Nusantara</h2>
+                <p>Pusat Informasi Akademik, Prestasi Siswa, dan Layanan Sekolah Terpadu</p>
+            </div>
+        </div>
+
+        <div class="home-grid">
+            <div class="left-column">
+                <!-- Sambutan Kepala Sekolah -->
+                <div class="card-box">
+                    <h3>Sambutan Kepala Sekolah</h3>
+                    <div class="sambutan-content">
+                        <img src="sugiono.jpeg" alt="Kepala Sekolah">
+                        <div>
+                            <p><strong>Dr. H. Ahmad Fauzi, M.Pd.</strong></p>
+                            <p style="margin-top: 5px; font-size: 0.9rem;">"Assalamu'alaikum Wr. Wb. Selamat datang di portal resmi SMA Negeri Nusantara. Kami berkomitmen untuk mencetak generasi yang cerdas, kompetitif, dan berakhlak mulia."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Berita Terbaru -->
+                <div class="card-box">
+                    <h3>Berita Terbaru & Kegiatan</h3>
+                    <div class="berita-grid">
+                        <div class="berita-item">
+                            <img src="juara.jpeg" alt="Berita 1">
+                            <div class="berita-item-text">
+                               <h4>Juara Olimpiade Sains</h4>
+                               <p>Siswa SMAN Nusantara meraih medali emas tingkat nasional.</p>
+                            </div>
+                        </div>
+                        <div class="berita-item">
+                            <img src="seni.jpeg" alt="Berita 2">
+                            <div class="berita-item-text">
+                               <h4>Pentas Seni 2026</h4>
+                               <p>Ajang unjuk bakat seni dan kreativitas pelajar.</p>
+                            </div>
+                        </div>
+                        <div class="berita-item">
+                            <img src="kongres.jpeg" alt="Berita 3">
+                            <div class="berita-item-text">
+                               <h4>Studi Kampus</h4>
+                               <p>Kunjungan edukatif siswa kelas XII ke universitas negeri.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="card-box">
+                    <h3>Ekstrakurikuler & Kegiatan</h3>
+                    <ul style="padding-left: 20px; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>🏀 Bola Basket & Voli</li>
+                        <li>💻 Klub Pemrograman & Robotika</li>
+                        <li>🎶 Paduan Suara & Seni Musik</li>
+                        <li>🔴 Paskibra & Pramuka</li>
+                    </ul>
+                </div>
+                <div class="card-box">
+                    <h3>Tautan Penting</h3>
+                    <ul style="padding-left: 20px; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px;">
+                        <li>📅 Kalender Akademik Terbaru</li>
+                        <li>📝 Pendaftaran Pengurus OSIS</li>
+                        <li>📍 Peta Lokasi & Kontak Sekolah</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 2. HALAMAN PROFIL ================= -->
+    <div id="profil" class="page-section">
+        <div class="card-box">
+            <h3>Visi & Misi Sekolah</h3>
+            <div class="sub-grid-2">
+                <div>
+                    <h4 style="color: var(--secondary-color); margin-bottom: 5px;">Visi</h4>
+                    <p>Terwujudnya lembaga pendidikan yang menghasilkan lulusan cerdas, berprestasi global, berlandaskan iman dan takwa.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary-color); margin-bottom: 5px;">Misi</h4>
+                    <p>1. Menyelenggarakan pembelajaran aktif dan inovatif.<br>2. Mengembangkan potensi bakat seni dan olahraga siswa.<br>3. Menanamkan karakter budi pekerti luhur.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-box">
+            <h3>Struktur Organisasi Sekolah</h3>
+            <p style="text-align: center; padding: 20px; background: var(--light-bg); border-radius: 6px; font-weight: 500;">
+                [Bagan Struktur Organisasi: Kepala Sekolah -> Komite -> Wakakurikulum -> Guru & Staf]
+            </p>
+        </div>
+    </div>
+
+    <!-- ================= 3. HALAMAN AKADEMIK ================= -->
+    <div id="akademik" class="page-section">
+        <div class="card-box">
+            <h3>Kurikulum & Program Belajar</h3>
+            <p>SMA Negeri Nusantara menerapkan Kurikulum Merdeka yang dirancang untuk mengoptimalkan kreativitas, penalaran kritis, serta penguatan Profil Pelajar Pancasila bagi seluruh siswa kelas X, XI, dan XII.</p>
+        </div>
+        <div class="card-box">
+            <h3>Daftar Dewan Guru</h3>
+            <div class="guru-grid">
+                <div class="guru-card">
+                    <img src="daus.jpeg" alt="Guru">
+                    <h4>Drs. Budi Santoso</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Guru Matematika</p>
+                </div>
+                <div class="guru-card">
+                    <img src="edoh.jpeg" alt="Guru">
+                    <h4>Siti Aminah, M.Pd.</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Guru Bahasa Indonesia</p>
+                </div>
+                <div class="guru-card">
+                    <img src="abang.jpeg" alt="Guru">
+                    <h4>Rian Hidayat, S.Kom.</h4>
+                    <p style="font-size: 0.8rem; color: #666;">Guru Informatika</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 4. HALAMAN KESISWAAN ================= -->
+    <div id="kesiswaan" class="page-section">
+        <div class="card-box">
+            <h3>Kegiatan Kesiswaan & OSIS</h3>
+            <p>Berbagai wadah pengembangan bakat dan minat siswa diorganisir secara aktif melalui OSIS, MPK, serta klub ekstrakurikuler pilihan yang rutin mengadakan kompetisi tingkat regional hingga nasional.</p>
+        </div>
+    </div>
+
+    <!-- ================= 5. HALAMAN PPDB ================= -->
+    <div id="ppdb" class="page-section">
+        <div class="card-box">
+            <h3>Penerimaan Peserta Didik Baru (PPDB)</h3>
+            <p style="margin-bottom: 15px;">Silakan isi formulir pendaftaran online di bawah ini atau unduh brosur persyaratan lengkap.</p>
+            <form onsubmit="alert('Data pendaftaran berhasil dikirim!'); return false;">
+                <div class="form-group">
+                    <label>Nama Lengkap Calon Siswa</label>
+                    <input type="text" required placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label>Asal Sekolah (SMP/Mts)</label>
+                    <input type="text" required placeholder="Masukkan nama asal sekolah">
+                </div>
+                <div class="form-group">
+                    <label>Email / Nomor WhatsApp Aktif</label>
+                    <input type="text" required placeholder="Contoh: 08123456789">
+                </div>
+                <button type="submit" class="btn-submit">Kirim Formulir Pendaftaran</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= 6. PORTAL AKADEMIK (SETELAH LOGIN) ================= -->
+    <div id="portal" class="page-section">
+        <div class="card-box" style="border-left: 4px solid var(--accent-color);">
+            <h3>Portal Akademik Siswa & Guru (Dashboard)</h3>
+            <p style="margin-bottom: 20px;">Selamat datang kembali di sistem akademik terpadu SMAN Nusantara.</p>
+            <div class="sub-grid-2">
+                <div style="background: var(--light-bg); padding: 15px; border-radius: 6px;">
+                    <h4 style="color: var(--primary-color);">📚 Jadwal & Nilai</h4>
+                    <p style="font-size: 0.85rem; margin-top: 5px;">Akses rekap nilai rapor semester, e-rapor, dan jadwal pelajaran mingguan.</p>
+                </div>
+                <div style="background: var(--light-bg); padding: 15px; border-radius: 6px;">
+                    <h4 style="color: var(--primary-color);">📋 Absensi & Tugas</h4>
+                    <p style="font-size: 0.85rem; margin-top: 5px;">Cek kehadiran harian secara digital serta kumpulkan tugas dari guru mata pelajaran.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 SMA Negeri Nusantara. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <!-- JavaScript Interaktif untuk Mengganti Halaman (Navbar Function) -->
+    <script>
+        function switchPage(pageId) {
+            // Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+
+            // Nonaktifkan semua kelas aktif pada navbar
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Tampilkan halaman yang dipilih
+            document.getElementById(pageId).classList.add('active-page');
+
+            // Beri tanda aktif pada menu navbar yang diklik (kecuali tombol login portal)
+            if(pageId !== 'portal') {
+                document.getElementById('nav-' + pageId).classList.add('active');
+            } else {
+                document.getElementById('nav-portal').classList.add('active');
+            }
+
+            // Scroll otomatis kembali ke atas halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
